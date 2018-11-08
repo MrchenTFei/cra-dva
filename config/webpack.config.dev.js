@@ -284,33 +284,25 @@ module.exports = {
           // By default we support CSS Modules with the extension .module.css
           {
             test: cssRegex,
-            exclude: cssModuleRegex,
-            use: getStyleLoaders({
-              importLoaders: 1,
-            }),
-          },
-          // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-          // using the extension .module.css
-          {
-            test: cssModuleRegex,
+            exclude: /node_modules|antd\.css/,
             use: getStyleLoaders({
               importLoaders: 1,
               modules: true,
               getLocalIdent: getCSSModuleLocalIdent,
             }),
           },
-          // Opt-in support for SASS (using .scss or .sass extensions).
-          // Chains the sass-loader with the css-loader and the style-loader
-          // to immediately apply all styles to the DOM.
-          // By default we support SASS Modules with the
-          // extensions .module.scss or .module.sass
+          {
+            test: cssRegex,
+            include: /node_modules|antd\.css/,
+            use: getStyleLoaders({
+              modules: false,
+            }),
+          },
           {
             test: sassRegex,
             exclude: sassModuleRegex,
             use: getStyleLoaders({ importLoaders: 2 }, 'sass-loader'),
           },
-          // Adds support for CSS Modules, but using SASS
-          // using the extension .module.scss or .module.sass
           {
             test: sassModuleRegex,
             use: getStyleLoaders(
@@ -325,17 +317,17 @@ module.exports = {
           {
             test: lessRegex,
             exclude: lessModuleRegex,
-            use: getStyleLoaders({ importLoaders: 2 }, 'less-loader'),
+            use: getStyleLoaders({
+              importLoaders: 2,
+              modules: true,
+              getLocalIdent: getCSSModuleLocalIdent
+            }, 'less-loader'),
           },
-          // Adds support for CSS Modules, but using less
-          // using the extension .module.scss or .module.less
           {
             test: lessModuleRegex,
             use: getStyleLoaders(
               {
-                importLoaders: 3,
-                modules: true,
-                getLocalIdent: getCSSModuleLocalIdent,
+                importLoaders: 2,
               },
               'less-loader'
             ),

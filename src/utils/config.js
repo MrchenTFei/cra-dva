@@ -25,7 +25,16 @@ const menuGlobal=[
       path: '/ccc',
       models: () => [import('../models/ccc')], //models可多个
       component: () => import('../routes/CCC'),
-  }, 
+  },
+  {
+    id:'login',
+    pid:'0',
+    name:'login页',
+    icon:'user',
+    path: '/login',
+    models: () => [import('../models/ccc')], //models可多个
+    component: () => import('../routes/Login'),
+},
 ];
 
 export default {
