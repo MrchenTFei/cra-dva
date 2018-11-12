@@ -1,10 +1,14 @@
 import { Map, fromJS } from 'immutable';
 import { routerRedux } from 'dva/router';
+import { config } from '../utils';
+
+const { menuMap } = config;
 
 const initState = Map({
   i18n: 'zh_CN',
   token: undefined,
   locationPathname: undefined,
+  menu: menuMap,
 })
 export default {
  
@@ -45,15 +49,19 @@ export default {
       yield put({ type: 'updateStore', payload })
     },
     * logout({ payload }, { put, select }) {
+      const loginUrl = yield select(_ => _.app.getIn(['menu', 'byId', 'login', 'path']));
+
       window.sessionStorage.removeItem('token');
       yield put(routerRedux.push({
-        pathname: '/login'
+        pathname: loginUrl,
       }));
     },
     * loginOk ({ payload }, {put, select}) {
+      const homeUrl = yield select(_ => _.app.getIn(['menu', 'byId', 'home', 'path']));
+
       window.sessionStorage.setItem('token',payload.token);
       yield put(routerRedux.push({
-          pathname: '/'
+          pathname: homeUrl,
       }));
     },
   },

@@ -16,7 +16,9 @@ class BBB extends Component {
   }
   render() {
     const { i18n, intl: { formatMessage } } = this.props;
-    console.log('====', this.props);
+    const aUrl = this.props.menu.getIn(['byId', 'aaa', 'path']);
+    const cUrl = this.props.menu.getIn(['byId', 'ccc', 'path']);
+
     const menu = (
       <Menu 
         onClick={this.changeLang}
@@ -53,9 +55,9 @@ class BBB extends Component {
         <p>
           BBB页
         </p>
-        <Link to="/aaa">去AAA页面</Link>
+        <Link to={aUrl}>去AAA页面</Link>
         <br />
-        <Link to="/ccc">去CCC页面</Link>
+        <Link to={cUrl}>去CCC页面</Link>
       </div>
     );
   }
@@ -63,4 +65,5 @@ class BBB extends Component {
  
 export default connect(({ app }) => ({
   i18n: app.get('i18n'),
+  menu: app.get('menu'),
 }))(injectIntl(BBB));

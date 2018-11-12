@@ -13,8 +13,7 @@ export default {
   },
 
   effects: {
-    * login({ payload, values }, { put }) {
-      console.log('------values', values, payload);
+    * login({ values }, { put }) {
       if (values.username === 'admin' && values.password === '123456') {
         yield put({
           type: 'app/loginOk',

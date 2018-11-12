@@ -1,3 +1,5 @@
+import { OrderedSet, Map, fromJS } from 'immutable';
+
 const menuGlobal=[
   {
       id:'aaa',
@@ -46,6 +48,20 @@ const menuGlobal=[
   },
 ];
 
+const menuMap = (() => {
+  let byId = Map();
+  let byPid = Map();
+  menuGlobal.forEach(item => {
+    byId = byId.set(item.id, fromJS(item));
+    byPid = byPid.update(item.pid, obj => obj ? obj.add(item.id) : OrderedSet([item.id]))
+  });
+  return Map({
+    byId,
+    byPid,
+  })
+})();
+
 export default {
-  menuGlobal
+  menuGlobal,
+  menuMap,
 }
