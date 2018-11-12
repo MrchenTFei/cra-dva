@@ -4,6 +4,7 @@ import { Button } from 'antd';
  
 class AAA extends Component {
   render() {
+    console.log('-=aaaa', this.props);
     return (
       <div>
         <p>
