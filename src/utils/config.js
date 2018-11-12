@@ -46,6 +46,16 @@ const menuGlobal=[
     models: () => [import('../models/home')], //models可多个
     component: () => import('../routes/home'),
   },
+
+  {
+    id:'home-edit',
+    pid:'home',
+    name:'首页-编辑和新增',
+    icon:'user',
+    path: '/edit/:id?',
+    models: () => [import('../models/home')], //models可多个
+    component: () => import('../routes/home/edit'),
+  },
 ];
 
 const menuMap = (() => {

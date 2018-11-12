@@ -64,6 +64,9 @@ export default {
           pathname: homeUrl,
       }));
     },
+    * goBack(_, { put }) {
+      yield put(routerRedux.goBack());
+    },
   },
 
   reducers: {
