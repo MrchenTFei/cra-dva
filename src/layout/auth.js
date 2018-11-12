@@ -1,5 +1,6 @@
-import {connect} from 'dva';
+import { connect } from 'dva';
 import React from 'react';
+import Layout from './layout';
  
 const Auth = ({ children, dispatch, token, locationPathname }) => {
  
@@ -17,9 +18,9 @@ const Auth = ({ children, dispatch, token, locationPathname }) => {
   }
  
   return (
-    <React.Fragment>
+    <Layout>
       {children}
-    </React.Fragment>
+    </Layout>
   );
 }
  

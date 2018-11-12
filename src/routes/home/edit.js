@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'dva';
-import { Link } from 'dva/router';
 import { injectIntl } from 'react-intl';
 import { Row, Col, Form, Button } from 'antd';
 import classnames from 'classnames';
@@ -17,7 +16,7 @@ class Home extends Component {
     }
 
     render(){
-        const { menu, match} = this.props;
+        const { match} = this.props;
         const id = match.params.id;
 
         return(
